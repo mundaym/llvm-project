@@ -163,6 +163,13 @@ public:
   Instruction *emitTrailingFence(IRBuilder<> &Builder, Instruction *Inst,
                                  AtomicOrdering Ord) const override;
 
+  /// Is unaligned memory access allowed for the given type, and is it fast
+  /// relative to software emulation.
+  bool allowsMisalignedMemoryAccesses(
+      EVT VT, unsigned AddrSpace, unsigned Align = 1,
+      MachineMemOperand::Flags Flags = MachineMemOperand::MONone,
+      bool *Fast = nullptr) const override;
+
   bool isFMAFasterThanFMulAndFAdd(const MachineFunction &MF,
                                   EVT VT) const override;
 

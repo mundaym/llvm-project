@@ -180,6 +180,14 @@ def HasStdExtZvamo : Predicate<"Subtarget->hasStdExtZvamo()">,
                               AssemblerPredicate<(all_of FeatureExtZvamo),
                               "'Zvamo'(Vector AMO Operations)">;
 
+// TODO: limit to integer? integer+float? integer+float+vector?
+def FeatureUnalignedAccess
+    : SubtargetFeature<"unaligned-access", "HasUnalignedAccess", "true",
+                       "Hardware support for unaligned memory accesses">;
+def UnalignedAccess : Predicate<"Subtarget->hasUnalignedAccess()">,
+                                AssemblerPredicate<(all_of FeatureUnalignedAccess),
+                                "Hardware support for unaligned memory accesses">;
+
 def Feature64Bit
     : SubtargetFeature<"64bit", "HasRV64", "true", "Implements RV64">;
 def IsRV64 : Predicate<"Subtarget->is64Bit()">,

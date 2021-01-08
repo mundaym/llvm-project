@@ -3853,6 +3853,22 @@ Value *RISCVTargetLowering::emitMaskedAtomicCmpXchgIntrinsic(
   return Result;
 }
 
+bool RISCVTargetLowering::allowsMisalignedMemoryAccesses(
+    EVT VT, unsigned, unsigned, MachineMemOperand::Flags, bool *Fast) const {
+  if (!Subtarget.hasUnalignedAccess())
+    return false;
+
+  // TODO: separate option for vector loads/stores?
+  if (!VT.isSimple())
+    return false;
+
+  // Assume unaligned accesses are fast when the hardware supports them.
+  if (Fast)
+    *Fast = true;
+
+  return true;
+}
+
 bool RISCVTargetLowering::isFMAFasterThanFMulAndFAdd(const MachineFunction &MF,
                                                      EVT VT) const {
   VT = VT.getScalarType();

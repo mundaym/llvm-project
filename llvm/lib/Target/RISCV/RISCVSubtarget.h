@@ -54,6 +54,7 @@ class RISCVSubtarget : public RISCVGenSubtargetInfo {
   bool HasStdExtZvlsseg = false;
   bool HasStdExtZvamo = false;
   bool HasStdExtZfh = false;
+  bool HasUnalignedAccess = false;
   bool HasRV64 = false;
   bool IsRV32E = false;
   bool EnableLinkerRelax = false;
@@ -120,6 +121,7 @@ public:
   bool hasStdExtZvlsseg() const { return HasStdExtZvlsseg; }
   bool hasStdExtZvamo() const { return HasStdExtZvamo; }
   bool hasStdExtZfh() const { return HasStdExtZfh; }
+  bool hasUnalignedAccess() const { return HasUnalignedAccess; }
   bool is64Bit() const { return HasRV64; }
   bool isRV32E() const { return IsRV32E; }
   bool enableLinkerRelax() const { return EnableLinkerRelax; }
